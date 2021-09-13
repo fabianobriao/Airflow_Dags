@@ -1,0 +1,33 @@
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from time import sleep
+from datetime import datetime
+from airflow.operators.python_operator import PythonOperator
+from airflow.providers.sftp.sensors.sftp import SFTPSensor
+from airflow.providers.ssh.hooks.ssh import SSHHook
+
+
+from datetime import datetime
+3#def sensorst():
+#    sleep(5)
+ #   return 'Sensor ST!'
+
+with DAG(
+    'testedeperadores',
+    description='First DAG',
+    schedule_interval='*/10 * * * *',
+    start_date=datetime(2021, 6, 1),
+    catchup=False,
+    # concurrency=6,
+    # max_active_runs=3,
+)as dag:
+    listbatchST = BashOperator(
+        task_id='listbatchST',
+        bash_command='sleep 3'
+    )
+
+    # sensor_ST = PythonOperator(
+    #     task_id='sensor_ST',
+    #     python_callable=sensorst,
+    # )
+listbatchST
